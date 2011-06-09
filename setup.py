@@ -9,7 +9,7 @@ setup(name='smit.importse',
       author_email='peter@smitmail.eu',
       packages=['smit'],
       package_dir={'': 'src'},
-      install_requires=[],
+      install_requires=['MySQL-python','psycopg2'],
       entry_points = dict(console_scripts=[
         'import_se = smit.importse.importer:run',
         ])

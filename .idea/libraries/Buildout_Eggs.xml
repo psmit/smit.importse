@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Buildout Eggs">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/eggs/psycopg2-2.4.1-py2.7-linux-x86_64.egg" />
+      <root url="file://$PROJECT_DIR$/eggs/MySQL_python-1.2.3-py2.7-linux-x86_64.egg" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
