@@ -12,7 +12,28 @@ class SEdb(object):
         self.post_history = []
         self.users = {}
         self.votes = []
-        
+
+    def validate(self):
+        for vote in self.votes:
+            if vote.post_id not in self.posts:
+                print "Vote %d invalid" % vote.id
+            if vote.user_id is not None and vote.user_id not in self.users:
+                print "Vote %d invalid" % vote.id
+
+        for badge in self.badges:
+            if badge.user_id not in self.users:
+                print "Badge %d invalid" % badge.id
+
+        for comment in self.comments:
+            if comment.user_id is not None and comment.user_id not in self.users:
+                print "Comment %d invalid" % comment.id
+
+        for ph in self.post_history:
+            if ph.post_id not in self.posts:
+                print "Post History %d invalid" % ph.id
+
+            if ph.user_id is not None and ph.user_id not in self.users:
+                print "Post History %d invalid" % ph.id
 
 class Badge(object):
     def __init__(self,data):
@@ -59,7 +80,6 @@ class Post(object):
             self.comment_count = int(data['CommentCount'])
         if 'FavoriteCount' in data:
             self.favorite_count = int(data['FavoriteCount'])
-        
 
 class User(object):
     def __init__(self,data):
@@ -97,6 +117,7 @@ class Comment(object):
 
 class PostHistory(object):
     def __init__(self,data):
+        self.user_id = self.user_display_name = self.comment = self.text = self.close_reason_id = None
         self.id = int(data['Id'])
         self.post_history_type_id = int(data['PostHistoryTypeId'])
         self.post_id = int(data['PostId'])
@@ -175,7 +196,8 @@ class UserHandler(ContentHandler):
         if name == 'row':
             self.db.users[int(attributes['Id'])] = User(attributes)
 
-        
+
+
 
 def run():
     dir_name = argv[1]
@@ -205,4 +227,6 @@ def run():
     c = db.comments[0]
     ph = db.post_history[0]
     print "Ready"
+
+    db.validate()
     
