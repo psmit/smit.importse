@@ -5,6 +5,7 @@ eggs
 include
 lib
 parts
+testdata
 .idea/workspace.xml
 .installed.cfg
 *.pyc
